@@ -1,0 +1,39 @@
+; to test
+; gmx grompp -f md.mdp -c em.gro -p curcumin_h.pdb.mol2_GMX.top -o md.tpr
+; gmx mdrun -ntmpi 1 -v -deffnm md
+; define                   = -DPOSRES_LIG
+integrator               = md
+dt                       = 0.002
+nsteps                   = 12500000
+nstxout                  = 0
+nstvout                  = 0
+nstfout                  = 0
+nstenergy                = 5000
+nstlog                   = 5000
+nstxout-compressed       = 5000
+cutoff-scheme            = verlet
+coulombtype              = PME
+constraints              = h-bonds
+vdwtype                  = cutoff
+vdw-modifier             = force-switch
+rlist                    = 1.0
+rvdw                     = 1.0
+rvdw-switch              = 0.9
+rcoulomb                 = 1.1
+DispCorr                 = EnerPres
+lincs-iter               = 2
+fourierspacing           = 0.25
+gen-vel                  = no
+; vmd md.gro md.trr
+; Temperature coupling
+tcoupl                  = V-rescale
+tc-grps                 = System
+tau-t                   = 0.1
+ref-t                   = 300
+
+; Pressure coupling
+pcoupl                  = no          ; لتثبيت الحجم أولاً كـ NVT سريعة
+
+; Velocity generation
+gen-temp                = 300
+gen-seed                = -1

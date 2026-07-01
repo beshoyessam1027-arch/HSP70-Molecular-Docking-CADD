@@ -1,0 +1,102 @@
+Remarks curcumin_h.pdb.mol2_CNS.par created by acpype (v: 2022.7.21) on Thu Jun 18 16:27:24 2026
+
+set echo=false end
+
+{ Bonds: atomType1 atomType2 kb r0 }
+BOND   oh_   ho_    371.4   0.9730
+BOND   c3_   hc_    330.6   1.0969
+BOND   ca_   ha_    345.8   1.0860
+BOND   ce_   ha_    342.5   1.0883
+BOND   cf_   ha_    342.5   1.0883
+BOND   c3_   h1_    330.6   1.0969
+BOND   os_   ca_    376.6   1.3696
+BOND   os_   c3_    308.6   1.4316
+BOND   oh_   ca_    384.0   1.3637
+BOND    o_    c_    637.7   1.2183
+BOND   ca_   ca_    461.1   1.3984
+BOND   ca_   ce_    361.3   1.4763
+BOND   c3_    c_    313.0   1.5241
+BOND   ce_   cf_    538.6   1.3509
+BOND    c_   cf_    354.5   1.4825
+
+{ Angles: aType1 aType2 aType3 kt t0 }
+ANGLe   os_   c3_   h1_     50.8   109.78
+ANGLe   ca_   ca_   ha_     48.2   119.88
+ANGLe   ca_   ce_   ha_     47.0   115.13
+ANGLe   ce_   cf_   ha_     49.8   118.22
+ANGLe   ca_   oh_   ho_     49.0   108.58
+ANGLe    c_   c3_   hc_     46.9   108.77
+ANGLe    c_   cf_   ha_     46.5   116.46
+ANGLe   cf_   ce_   ha_     49.8   118.22
+ANGLe   hc_   c3_   hc_     39.4   107.58
+ANGLe   h1_   c3_   h1_     39.2   108.46
+ANGLe   os_   ca_   ca_     69.6   119.20
+ANGLe   oh_   ca_   ca_     69.5   119.90
+ANGLe    o_    c_   c3_     67.4   123.20
+ANGLe    o_    c_   cf_     68.8   123.20
+ANGLe   ca_   ca_   ca_     66.6   120.02
+ANGLe   ca_   ce_   cf_     63.7   127.52
+ANGLe   c3_    c_   cf_     62.9   116.44
+ANGLe   ca_   ca_   ce_     64.5   120.82
+ANGLe   ca_   os_   c3_     62.5   117.96
+ANGLe   ce_   cf_    c_     63.8   126.41
+ANGLe    c_   c3_    c_     63.4   111.63
+
+{ Proper Dihedrals: aType1 aType2 aType3 aType4 kt period phase }
+DIHEdral   ca_   ca_   ca_   ce_           3.625    2   180.00
+DIHEdral   ca_   ca_   ce_   ha_           0.700    2   180.00
+DIHEdral   c3_    c_   cf_   ce_           2.175    2   180.00
+DIHEdral   c3_   os_   ca_   ca_           0.900    2   180.00
+DIHEdral    c_   c3_    c_   cf_           0.000    2   180.00
+DIHEdral   ca_   ce_   cf_   ha_           6.650    2   180.00
+DIHEdral   ce_   ca_   ca_   ha_           3.625    2   180.00
+DIHEdral   ca_   ca_   ca_   ca_           3.625    2   180.00
+DIHEdral   ha_   ce_   cf_   ha_           6.650    2   180.00
+DIHEdral   oh_   ca_   ca_   ha_           3.625    2   180.00
+DIHEdral   ce_   ca_   ca_   ca_           3.625    2   180.00
+DIHEdral   cf_    c_   c3_   hc_           0.000    2   180.00
+DIHEdral   os_   ca_   ca_   oh_           3.625    2   180.00
+DIHEdral   ca_   ce_   cf_    c_           6.650    2   180.00
+DIHEdral    o_    c_   c3_   hc_  MULT 3   0.800    1     0.00
+                                           0.000    0     0.00
+                                           0.080    3   180.00
+DIHEdral    o_    c_   cf_   ce_           2.175    2   180.00
+DIHEdral    o_    c_   cf_   ha_           2.175    2   180.00
+DIHEdral    c_   cf_   ce_   ha_           6.650    2   180.00
+DIHEdral   ca_   os_   c3_   h1_           0.383    3     0.00
+DIHEdral   ca_   ca_   oh_   ho_           0.900    2   180.00
+DIHEdral   os_   ca_   ca_   ca_           3.625    2   180.00
+DIHEdral   os_   ca_   ca_   ha_           3.625    2   180.00
+DIHEdral   oh_   ca_   ca_   ca_           3.625    2   180.00
+DIHEdral    o_    c_   c3_    c_           0.000    2   180.00
+DIHEdral   c3_    c_   cf_   ha_           2.175    2   180.00
+DIHEdral   ca_   ca_   os_   c3_           0.900    2   180.00
+DIHEdral   ca_   ca_   ce_   cf_           0.700    2   180.00
+DIHEdral   ha_   ca_   ca_   ha_           3.625    2   180.00
+DIHEdral   ca_   ca_   ca_   ha_           3.625    2   180.00
+
+{ Improper Dihedrals: aType1 aType2 aType3 aType4 kt period phase }
+IMPRoper   ca_   ca_   ca_   oh_           1.1    2   180.00
+IMPRoper   os_   ca_   ca_   ca_           1.1    2   180.00
+IMPRoper   ca_   ca_   ca_   os_           1.1    2   180.00
+IMPRoper   ca_   cf_   ce_   ha_           1.1    2   180.00
+IMPRoper    c_   ce_   cf_   ha_           1.1    2   180.00
+IMPRoper   ca_   ca_   ca_   ce_           1.1    2   180.00
+IMPRoper   ca_   ca_   ca_   ha_           1.1    2   180.00
+IMPRoper   c3_   cf_    c_    o_          10.5    2   180.00
+
+{ Nonbonded: Type Emin sigma; (1-4): Emin/2 sigma }
+NONBonded   os_    0.170000    3.000012    0.085000    3.000012
+NONBonded   oh_    0.210400    3.066473    0.105200    3.066473
+NONBonded    o_    0.210000    2.959922    0.105000    2.959922
+NONBonded   ca_    0.086000    3.399670    0.043000    3.399670
+NONBonded   c3_    0.109400    3.399670    0.054700    3.399670
+NONBonded   ce_    0.086000    3.399670    0.043000    3.399670
+NONBonded    c_    0.086000    3.399670    0.043000    3.399670
+NONBonded   cf_    0.086000    3.399670    0.043000    3.399670
+NONBonded   ho_    0.000000    0.000000    0.000000    0.000000
+NONBonded   hc_    0.015700    2.649533    0.007850    2.649533
+NONBonded   ha_    0.015000    2.599642    0.007500    2.599642
+NONBonded   h1_    0.015700    2.471353    0.007850    2.471353
+
+set echo=true end

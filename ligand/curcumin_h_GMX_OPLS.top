@@ -1,0 +1,19 @@
+; curcumin_h.pdb.mol2_GMX_OPLS.top created by acpype (v: 2022.7.21) on Thu Jun 18 16:27:24 2026
+
+; Include forcefield parameters
+#include "ffoplsaa.itp"
+
+; Include curcumin_h.pdb.mol2_GMX.itp topology
+#include "curcumin_h.pdb.mol2_GMX.itp"
+
+; Ligand position restraints
+#ifdef POSRES_LIG
+#include "posre_curcumin_h.pdb.mol2.itp"
+#endif
+
+[ system ]
+ curcumin_h.pdb.mol2
+
+[ molecules ]
+; Compound        nmols
+ curcumin_h.pdb.mol2 1

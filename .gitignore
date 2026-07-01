@@ -1,0 +1,8 @@
+*.xtc
+*.trr
+*.edr
+*.cpt
+*.tpr
+*.log
+#*
+.#*
