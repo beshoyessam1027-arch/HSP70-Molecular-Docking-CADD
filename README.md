@@ -11,6 +11,30 @@ Molecular Dynamics Simulation profiles for Hsp70-Curcumin complex using GROMACS.
 | **4. Molecular Docking** | Run high-exhaustiveness docking utilizing **AutoDock Vina** via **Linux WSL**. | Calculating the binding affinities ($\Delta G$ in kcal/mol) to find the strongest binders. | **Curcumin** identified as top lead candidate (**-7.132 kcal/mol**). | ✅ *Completed* |
 | **5. Interaction Analysis** | Visualize hydrogen bonds and hydrophobic interactions using **PLIP Server**. | Deciphering the exact molecular locks holding the drug inside the cancer-related protein. | Mapped H-bonds with core catalytic network (`Lys-1296`, `Glu-269`). | ✅ *Completed* |
 | **6. Toxicity Profiling** | Predict cardiotoxicity (hERG) and liver safety using **ADMETlab 3.0**. | Filtering out toxic drug candidates before moving to in vivo studies. | Validated safety profile: **Low Risk** for hERG (0.437) & Hepatotoxicity (0.429). | ✅ *Completed* |
+| **7. MD System Setup & Solvation** | Prepare topologies (`topol.top`, `curcumin_ligand.itp`) and solvate in a cubic water box using **GROMACS**. | Mimicking the physiological aqueous environment of the cellular cytoplasm. | System solvated using explicit water models and neutralized with $Na^+$/$Cl^-$ counter-ions. | ✅ *Completed* |
+| **8. Energy Minimization & Equilibration** | Run Steepest Descent minimization followed by **NVT** and **NPT** ensembles. | Relaxing steric clashes and stabilizing system temperature ($310\text{ K}$) and pressure ($1\text{ bar}$). | Potential energy minimized below threshold; temperature and density stabilized. | ✅ *Completed* |
+| **9. Production MD Run** | Execute a high-performance production MD simulation ($12,500,000$ steps) via Linux/WSL. | Observing the real-time dynamic stability and physical behavior of the complex. | Running a **25 ns** trajectory simulation; checkpointing enabled. | ⏳ *In Progress* |
+| **10. Trajectory Analysis** | Analyze structural fluctuations post-simulation via RMSD, RMSF, Rg, and H-bonds. | Quantifying the true binding stability and binding kinetics over time. | Outputting `.xtc` / `.edr` data for plotting thermodynamic graphs. | 🎯 *Upcoming* |
+
+---
+
+### 📊 Visual Evidence & Analysis Figures
+
+#### Phase 2: Active Site Identification (P2RANK)
+![Predicted Pocket](<img width="1366" height="619" alt="predicted_pocket" src="https://github.com/user-attachments/assets/ef980176-c6dd-45d0-886c-0e249bc9bf41" />
+)
+
+#### Phase 3: Phytochemical Drug-Likeness Radar (SwissADME)
+![Curcumin Radar](<img width="665" height="509" alt="curcumin_radar" src="https://github.com/user-attachments/assets/5882c747-3671-4e90-86a4-a679b09c5696" />
+)
+
+#### Phase 4: Target Protein Extraction (PDB: 7GYI)
+![HSP70 Protein](<img width="994" height="560" alt="hsp70_protein" src="https://github.com/user-attachments/assets/2be2ec85-53fe-40c2-b638-033269b9ad2c" />
+)
+
+#### Phase 5: Molecular Interaction Profiling (PLIP)
+![Native Interactions](<img width="1111" height="359" alt="native_interactions" src="https://github.com/user-attachments/assets/34195759-d177-44b8-bbdb-07f37f871dde" />
+)
 
 
 ## 🧬 Project Workflow & Methodology
