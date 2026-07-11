@@ -21,6 +21,22 @@ Molecular Dynamics Simulation profiles for Hsp70-Curcumin complex using GROMACS.
 ### 📊 Visual Evidence & Analysis Figures
 
 #### Phase 2: Active Site Identification (P2RANK)
+![Predicted Pocket](images/predicted_pocket.png)
+
+#### Phase 3: Phytochemical Drug-Likeness Radar (SwissADME)
+![Curcumin Radar](images/curcumin_radar.png)
+
+#### Phase 4: Target Protein Extraction (PDB: 7GYI)
+![HSP70 Protein](images/hsp70_protein.png)
+
+#### Phase 5: Molecular Interaction Profiling (PLIP)
+![Native Interactions](images/native_interactions.png)
+
+---
+
+### 📊 Visual Evidence & Analysis Figures
+
+#### Phase 2: Active Site Identification (P2RANK)
 ![Predicted Pocket](<img width="1366" height="619" alt="predicted_pocket" src="https://github.com/user-attachments/assets/ef980176-c6dd-45d0-886c-0e249bc9bf41" />
 )
 
