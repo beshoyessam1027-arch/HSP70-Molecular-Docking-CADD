@@ -21,36 +21,18 @@ Molecular Dynamics Simulation profiles for Hsp70-Curcumin complex using GROMACS.
 ### 📊 Visual Evidence & Analysis Figures
 
 #### Phase 2: Active Site Identification (P2RANK)
-![Predicted Pocket](images/predicted_pocket.png)
+![Predicted Pocket](figures/predicted_pocket.png)
 
 #### Phase 3: Phytochemical Drug-Likeness Radar (SwissADME)
-![Curcumin Radar](images/curcumin_radar.png)
+![Curcumin Radar](figures/curcumin_radar.png)
 
 #### Phase 4: Target Protein Extraction (PDB: 7GYI)
-![HSP70 Protein](images/hsp70_protein.png)
+![HSP70 Protein](figures/hsp70_protein.png)
 
 #### Phase 5: Molecular Interaction Profiling (PLIP)
-![Native Interactions](images/native_interactions.png)
+![Native Interactions](figures/native_interactions.png)
 
 ---
-
-### 📊 Visual Evidence & Analysis Figures
-
-#### Phase 2: Active Site Identification (P2RANK)
-![Predicted Pocket](<img width="1366" height="619" alt="predicted_pocket" src="https://github.com/user-attachments/assets/ef980176-c6dd-45d0-886c-0e249bc9bf41" />
-)
-
-#### Phase 3: Phytochemical Drug-Likeness Radar (SwissADME)
-![Curcumin Radar](<img width="665" height="509" alt="curcumin_radar" src="https://github.com/user-attachments/assets/5882c747-3671-4e90-86a4-a679b09c5696" />
-)
-
-#### Phase 4: Target Protein Extraction (PDB: 7GYI)
-![HSP70 Protein](<img width="994" height="560" alt="hsp70_protein" src="https://github.com/user-attachments/assets/2be2ec85-53fe-40c2-b638-033269b9ad2c" />
-)
-
-#### Phase 5: Molecular Interaction Profiling (PLIP)
-![Native Interactions](<img width="1111" height="359" alt="native_interactions" src="https://github.com/user-attachments/assets/34195759-d177-44b8-bbdb-07f37f871dde" />
-)
 
 
 ## 🧬 Project Workflow & Methodology
