@@ -1,5 +1,13 @@
-# HSP70 Molecular Docking - CADD
-Molecular Dynamics Simulation profiles for Hsp70-Curcumin complex using GROMACS.
+# 🧬 Hsp70-Curcumin CADD & 25 ns GROMACS Molecular Dynamics Simulation
+
+An end-to-end Computer-Aided Drug Design (CADD) and Molecular Dynamics (MD) simulation pipeline evaluating the structural stability, binding affinity, and dynamic interaction kinetics of **Curcumin** against the human Heat Shock Protein 70 (**HSP70 / HSPA1A**).
+
+---
+
+## 🎯 Biological Significance & Therapeutic Rationale
+**HSP70 (HSPA1A)** is a critical molecular chaperone highly overexpressed in various human malignancies. It plays a pivotal role in tumor cell survival, inhibition of apoptosis, and resistance to standard chemotherapy. Targeting the **ATP-binding Nucleotide-Binding Domain (NBD)** of HSP70 with natural phytochemicals—such as Curcumin—aims to disrupt its chaperone activity, offering a potential therapeutic strategy in molecular oncology.
+
+---
 
 ## 🗺️ Project Roadmap & Workflow
 
@@ -18,7 +26,7 @@ Molecular Dynamics Simulation profiles for Hsp70-Curcumin complex using GROMACS.
 
 ---
 
-### 📊 Visual Evidence & Analysis Figures
+## 📊 Visual Evidence & Analysis Figures
 
 #### Phase 2: Active Site Identification (P2RANK)
 ![Predicted Pocket](figures/predicted_pocket.png)
@@ -34,32 +42,53 @@ Molecular Dynamics Simulation profiles for Hsp70-Curcumin complex using GROMACS.
 
 ---
 
-
-## 🧬 Project Workflow & Methodology
-
-The project follows a comprehensive computer-aided drug design (CADD) and molecular dynamics (MD) simulation pipeline to evaluate the stability of the Hsp70-Curcumin complex:
+## 🧬 Project Workflow & Detailed Methodology
 
 ### 1. Structure Preparation & Target Selection
-* **Target Protein:** Human Heat Shock Protein 70 (HSP70 / HSPA1A) retrieved from the PDB database.
-* **Ligand Preparation:** Curcumin structure retrieved, optimized, and parameterized using appropriate force fields to generate proper topology profiles.
+* **Target Protein:** Human Heat Shock Protein 70 (HSP70 / HSPA1A) retrieved from the PDB database (`7GYI`, $1.90\text{ \AA}$ resolution).
+* **Ligand Preparation:** Curcumin structure retrieved, optimized, and parameterized using force field topologies.
 
 ### 2. Molecular Docking (CADD)
-* Rigid and flexible docking simulations executed to identify the optimal binding pose, lowest binding energy ($kcal/mol$), and key amino acid interactions within the HSP70 nucleotide-binding domain (NBD) or substrate-binding domain (SBD).
+* Rigid and flexible docking simulations executed via AutoDock Vina to identify optimal binding pose, binding free energy ($\Delta G = -7.132\text{ kcal/mol}$), and key hydrogen-bonding anchors (`Lys-1296`, `Glu-269`) within the nucleotide-binding domain (NBD).
 
 ### 3. Molecular Dynamics (MD) Simulation Setup (GROMACS)
-* **System Solvation:** The protein-ligand complex is centered in a cubic box and solvated with explicit water models (e.g., SPC/E or TIP3P).
-* **Charge Neutralization:** Counter-ions ($Na^+$ / $Cl^-$) added to neutralize the net charge of the system.
-* **Energy Minimization:** Conducted using the Steepest Descent algorithm to remove steric clashes and optimize structural geometry.
-* **Equilibration:** 
-  * **NVT Ensemble:** Constant Number of particles, Volume, and Temperature to stabilize system temperature.
-  * **NPT Ensemble:** Constant Number of particles, Pressure, and Temperature to stabilize system density.
+* **System Solvation:** Protein-ligand complex centered in a cubic box and solvated with explicit water models (SPC/E / TIP3P).
+* **Charge Neutralization:** Counter-ions ($Na^+$ / $Cl^-$) added to neutralize net system charge.
+* **Energy Minimization:** Executed via Steepest Descent algorithm to remove steric clashes and optimize geometry.
+* **Equilibration Ensembles:** 
+  * **NVT Ensemble:** Constant Particles, Volume, and Temperature ($310\text{ K}$) for thermal stabilization.
+  * **NPT Ensemble:** Constant Particles, Pressure ($1\text{ bar}$), and Temperature for density stabilization.
 
-### 4. Production MD Run
-* A production run of **25 ns** ($12,500,000$ steps) is executed on Linux/WSL environment to capture the dynamic behavior and conformational changes of the complex.
+### 4. Production MD Simulation Run
+* A high-performance production run of **25 ns** ($12,500,000$ steps) is executing in a Linux/WSL environment to capture dynamic structural fluctuations and binding kinetics.
 
-### 5. Post-Simulation Trajectory Analysis (Upcoming)
-* Evaluation of structural stability and flexibility via:
-  * Root Mean Square Deviation (RMSD)
-  * Root Mean Square Fluctuation (RMSF)
+### 5. Post-Simulation Trajectory Analysis (Upcoming Targets)
+Post-simulation trajectory evaluation will quantify structural complex stability through:
+* **RMSD (Root Mean Square Deviation):** Assessing overall complex structural stability over the 25 ns trajectory.
+* **RMSF (Root Mean Square Fluctuation):** Mapping per-residue flexibility and binding pocket rigidity.
+* **Radius of Gyration ($R_g$):** Evaluating protein compactness and conformational changes upon ligand binding.
+* **Intermolecular Hydrogen Bonds:** Tracking dynamic H-bond stability and occupancy over time.
+
+---
+
+## 🛠️ Software Stack & Environment Specifications
+
+| Category | Tool / Software | Version / Server | Purpose |
+| :--- | :--- | :--- | :--- |
+| **Operating Environment** | Ubuntu via Linux WSL2 | 22.04 LTS | High-performance command-line computing |
+| **Target & Active Site** | RCSB PDB / P2RANK | PrankWeb Server | Structure retrieval (`7GYI`) & Binding site mapping |
+| **Virtual Screening** | SwissADME / ADMETlab | Web Servers | Lipinski filtering & ADMET toxicity profiling |
+| **Molecular Docking** | AutoDock Vina | v1.2.x | Flexible ligand-protein docking simulations |
+| **Interaction Profiling** | PLIP Server / PyMOL | Web / v2.5+ | Non-covalent interaction mapping & visualization |
+| **MD Engine** | GROMACS | v2023.x / CHARMM36 | System setup, equilibration, & trajectory production |
+| **Format Conversion** | OpenBabel | v3.1.x | Chemical format conversion and atom parameterization |
+
+---
+
+## 🏁 Future Work
+Upon completion of the 25 ns production trajectory:
+1. Generate thermodynamic plots (RMSD, RMSF, $R_g$, H-bonds) using GROMACS analysis tools and R/Python visualization libraries.
+2. Calculate binding free energies using MM-PBSA / MM-GBSA methods.
+3. Prepare computational findings for academic research publication and wet-lab validation.
   * Radius of Gyration (Rg)
   * Hydrogen Bond (H-bonds) profiling over the simulation trajectory.
