@@ -21,8 +21,8 @@ An end-to-end Computer-Aided Drug Design (CADD) and Molecular Dynamics (MD) simu
 | **6. Toxicity Profiling** | Predict cardiotoxicity (hERG) and liver safety using **ADMETlab 3.0**. | Filtering out toxic drug candidates before moving to in vivo studies. | Validated safety profile: **Low Risk** for hERG (0.437) & Hepatotoxicity (0.429). | ✅ *Completed* |
 | **7. MD System Setup & Solvation** | Prepare topologies (`topol.top`, `curcumin_ligand.itp`) and solvate in a cubic water box using **GROMACS**. | Mimicking the physiological aqueous environment of the cellular cytoplasm. | System solvated using explicit water models and neutralized with $Na^+$/$Cl^-$ counter-ions. | ✅ *Completed* |
 | **8. Energy Minimization & Equilibration** | Run Steepest Descent minimization followed by **NVT** and **NPT** ensembles. | Relaxing steric clashes and stabilizing system temperature ($310\text{ K}$) and pressure ($1\text{ bar}$). | Potential energy minimized below threshold; temperature and density stabilized. | ✅ *Completed* |
-| **9. Production MD Run** | Execute a high-performance production MD simulation ($12,500,000$ steps) via Linux/WSL. | Observing the real-time dynamic stability and physical behavior of the complex. | Running a **25 ns** trajectory simulation; checkpointing enabled. | ⏳ *In Progress* |
-| **10. Trajectory Analysis** | Analyze structural fluctuations post-simulation via RMSD, RMSF, Rg, and H-bonds. | Quantifying the true binding stability and binding kinetics over time. | Outputting `.xtc` / `.edr` data for plotting thermodynamic graphs. | 🎯 *Upcoming* |
+| **9. Production MD Run** | Execute a high-performance production MD simulation ($12,500,000$ steps) via Linux/WSL. | Observing the real-time dynamic stability and physical behavior of the complex. | Completed a **25 ns** trajectory simulation successfully. | ✅ *Completed* |
+| **10. Trajectory Analysis** | Analyze structural fluctuations post-simulation via RMSD, RMSF, Rg, and H-bonds. | Quantifying the true binding stability and binding kinetics over time. | Processed trajectory data and plotted thermodynamic graphs using R. | ✅ *Completed* |
 
 ---
 
@@ -39,6 +39,12 @@ An end-to-end Computer-Aided Drug Design (CADD) and Molecular Dynamics (MD) simu
 
 #### Phase 5: Molecular Interaction Profiling (PLIP)
 ![Native Interactions](figures/native_interactions.png)
+
+#### Phase 10: Protein Backbone Stability, Flexibility & Compactness (MD)
+![Protein Stability Analysis](Protein_Stability_MD_Analysis.png)
+
+#### Phase 10: Ligand Binding Positional Stability & Hydrogen Bonding (MD)
+![Ligand Interaction Analysis](Ligand_Interaction_MD_Analysis.png)
 
 ---
 
@@ -60,14 +66,14 @@ An end-to-end Computer-Aided Drug Design (CADD) and Molecular Dynamics (MD) simu
   * **NPT Ensemble:** Constant Particles, Pressure ($1\text{ bar}$), and Temperature for density stabilization.
 
 ### 4. Production MD Simulation Run
-* A high-performance production run of **25 ns** ($12,500,000$ steps) is executing in a Linux/WSL environment to capture dynamic structural fluctuations and binding kinetics.
+* A high-performance production run of **25 ns** ($12,500,000$ steps) executed in a Linux/WSL environment to capture dynamic structural fluctuations and binding kinetics.
 
-### 5. Post-Simulation Trajectory Analysis (Upcoming Targets)
-Post-simulation trajectory evaluation will quantify structural complex stability through:
-* **RMSD (Root Mean Square Deviation):** Assessing overall complex structural stability over the 25 ns trajectory.
-* **RMSF (Root Mean Square Fluctuation):** Mapping per-residue flexibility and binding pocket rigidity.
-* **Radius of Gyration ($R_g$):** Evaluating protein compactness and conformational changes upon ligand binding.
-* **Intermolecular Hydrogen Bonds:** Tracking dynamic H-bond stability and occupancy over time.
+### 5. Post-Simulation Trajectory Analysis
+Post-simulation trajectory evaluation quantified structural complex stability through:
+* **RMSD (Root Mean Square Deviation):** The backbone RMSD initialized rapidly and stabilized after ~15 ns, maintaining a steady equilibrium state around ~0.28 nm for the remainder of the 25 ns simulation.
+* **RMSF (Root Mean Square Fluctuation):** Mapping per-residue flexibility revealed core domain and binding pocket rigidity (< 0.2 nm), with flexible fluctuations strictly confined to the terminal regions (N- and C-termini).
+* **Radius of Gyration ($R_g$):** $R_g$ values progressively decreased and plateaued between 2.20 nm and 2.22 nm, demonstrating that Hsp70 remained tightly folded and compact upon Curcumin binding.
+* **Intermolecular Hydrogen Bonds:** The ligand experienced a slight conformational shift around 13 ns to settle into an energetically favorable pose (~0.6 nm RMSD) while maintaining a continuous hydrogen bonding network (1 to 3 active H-bonds) across the entire 25 ns trajectory.
 
 ---
 
@@ -81,12 +87,13 @@ Post-simulation trajectory evaluation will quantify structural complex stability
 | **Molecular Docking** | AutoDock Vina | v1.2.x | Flexible ligand-protein docking simulations |
 | **Interaction Profiling** | PLIP Server / PyMOL | Web / v2.5+ | Non-covalent interaction mapping & visualization |
 | **MD Engine** | GROMACS | v2023.x / CHARMM36 | System setup, equilibration, & trajectory production |
+| **Data Parsing & Plotting** | R / RStudio | v4.x | Statistical data visualization & plot generation |
 | **Format Conversion** | OpenBabel | v3.1.x | Chemical format conversion and atom parameterization |
 
 ---
 
 ## 🏁 Future Work
-Upon completion of the 25 ns production trajectory:
+Upon completion of the 25 ns production trajectory and initial analysis:
 1. Generate thermodynamic plots (RMSD, RMSF, $R_g$, H-bonds) using GROMACS analysis tools and R/Python visualization libraries.
 2. Calculate binding free energies using MM-PBSA / MM-GBSA methods.
 3. Prepare computational findings for academic research publication and wet-lab validation.
