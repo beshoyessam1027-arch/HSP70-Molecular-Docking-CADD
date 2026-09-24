@@ -67,6 +67,7 @@ An end-to-end Computer-Aided Drug Design (CADD) and Molecular Dynamics (MD) simu
 
 ### 4. Production MD Simulation Run
 * A high-performance production run of **25 ns** ($12,500,000$ steps) executed in a Linux/WSL environment to capture dynamic structural fluctuations and binding kinetics.
+* ![MD Trajectory Animation](figures/md_simulation.gif)
 
 ### 5. Post-Simulation Trajectory Analysis
 Post-simulation trajectory evaluation quantified structural complex stability through:
