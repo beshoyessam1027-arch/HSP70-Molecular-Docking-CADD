@@ -1,7 +1,8 @@
 # 🧬 Hsp70-Curcumin CADD & 25 ns GROMACS Molecular Dynamics Simulation
 
 An end-to-end Computer-Aided Drug Design (CADD) and Molecular Dynamics (MD) simulation pipeline evaluating the structural stability, binding affinity, and dynamic interaction kinetics of **Curcumin** against the human Heat Shock Protein 70 (**HSP70 / HSPA1A**).
-
+📄 **Read the Full Technical Manuscript (PDF):** 
+[Hsp70_Curcumin_MD_Manuscript.pdf](./Hsp70_Curcumin_MD_Manuscript.pdf)
 ---
 
 ## 🎯 Biological Significance & Therapeutic Rationale
