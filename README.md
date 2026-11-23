@@ -1,109 +1,109 @@
-# 🧬 Hsp70-Curcumin CADD & 25 ns GROMACS Molecular Dynamics Simulation
+# Hsp70–Curcumin: Docking and 25 ns GROMACS MD (in silico)
 
-An end-to-end Computer-Aided Drug Design (CADD) and Molecular Dynamics (MD) simulation pipeline evaluating the structural stability, binding affinity, and dynamic interaction kinetics of **Curcumin** against the human Heat Shock Protein 70 (**HSP70 / HSPA1A**).
-# In Silico Evaluation & 25 ns MD Simulation of Human Hsp70-Curcumin Complex
+Computational study of **curcumin** binding to the nucleotide-binding domain (NBD) of human **Hsp70 (HSPA1A)**: ADME screening, AutoDock Vina docking, and a single 25 ns all-atom MD run in GROMACS.
 
-[![DOI](https://zenodo.org/records/23085117?preview_file=Hsp70_Curcumin_Manuscript.pdf)](https://zenodo.org/records/23085117)
+> **Status:** computational prediction only. No experimental validation. The results below describe what was simulated; they are not evidence that curcumin inhibits Hsp70.
 
-📄 **Cite / Read the Full Preprint (PDF):** [https://doi.org/10.5281/zenodo.23085117](https://doi.org/10.5281/zenodo.23085117)
-📄 **Read the Full Technical Manuscript (PDF):** 
-[Hsp70_Curcumin_MD_Manuscript.pdf](./Hsp70_Curcumin_MD_Manuscript.pdf)
----
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23085117.svg)](https://doi.org/10.5281/zenodo.23085117)
 
-## 🎯 Biological Significance & Therapeutic Rationale
-**HSP70 (HSPA1A)** is a critical molecular chaperone highly overexpressed in various human malignancies. It plays a pivotal role in tumor cell survival, inhibition of apoptosis, and resistance to standard chemotherapy. Targeting the **ATP-binding Nucleotide-Binding Domain (NBD)** of HSP70 with natural phytochemicals—such as Curcumin—aims to disrupt its chaperone activity, offering a potential therapeutic strategy in molecular oncology.
+- Preprint (Zenodo): https://doi.org/10.5281/zenodo.23085117
+- Manuscript PDF in this repo: [Hsp70_Curcumin_Manuscript.pdf](./Hsp70_Curcumin_Manuscript.pdf)
 
 ---
 
-## 🗺️ Project Roadmap & Workflow
+## Background
 
-| Phase / Step | Dry-Lab Action | Wet-Lab / Biological Relevance | Key Outputs & Metrics | Status |
-| :---: | :--- | :--- | :--- | :---: |
-| **1. Target Selection** | Filter and download the 3D crystal structure of Human HSPA1A from **RCSB PDB**. | Ensuring high-resolution ($1.90\text{ \AA}$) human-specific protein target. | Downloaded `7GYI` and optimized via OpenBabel (`-xr -h`). | ✅ *Completed* |
-| **2. Active Site Identification** | Map the co-crystallized ligand coordinates ($X, Y, Z$) using **P2RANK (PrankWeb)**. | Defining the exact binding pocket (ATP-binding domain) to prevent off-target docking. | Identified Pocket 1 centered around key dynamic residues. | ✅ *Completed* |
-| **3. Virtual Screening (ADME)** | Filter a library of chemical ligands using **SwissADME** (Lipinski's Rule of 5). | Selecting compounds with high oral bioavailability and drug-likeness. | Curcumin and Thymoquinone passed all drug-likeness filters. | ✅ *Completed* |
-| **4. Molecular Docking** | Run high-exhaustiveness docking utilizing **AutoDock Vina** via **Linux WSL**. | Calculating the binding affinities ($\Delta G$ in kcal/mol) to find the strongest binders. | **Curcumin** identified as top lead candidate (**-7.132 kcal/mol**). | ✅ *Completed* |
-| **5. Interaction Analysis** | Visualize hydrogen bonds and hydrophobic interactions using **PLIP Server**. | Deciphering the exact molecular locks holding the drug inside the cancer-related protein. | Mapped H-bonds with core catalytic network (`Lys-1296`, `Glu-269`). | ✅ *Completed* |
-| **6. Toxicity Profiling** | Predict cardiotoxicity (hERG) and liver safety using **ADMETlab 3.0**. | Filtering out toxic drug candidates before moving to in vivo studies. | Validated safety profile: **Low Risk** for hERG (0.437) & Hepatotoxicity (0.429). | ✅ *Completed* |
-| **7. MD System Setup & Solvation** | Prepare topologies (`topol.top`, `curcumin_ligand.itp`) and solvate in a cubic water box using **GROMACS**. | Mimicking the physiological aqueous environment of the cellular cytoplasm. | System solvated using explicit water models and neutralized with $Na^+$/$Cl^-$ counter-ions. | ✅ *Completed* |
-| **8. Energy Minimization & Equilibration** | Run Steepest Descent minimization followed by **NVT** and **NPT** ensembles. | Relaxing steric clashes and stabilizing system temperature ($310\text{ K}$) and pressure ($1\text{ bar}$). | Potential energy minimized below threshold; temperature and density stabilized. | ✅ *Completed* |
-| **9. Production MD Run** | Execute a high-performance production MD simulation ($12,500,000$ steps) via Linux/WSL. | Observing the real-time dynamic stability and physical behavior of the complex. | Completed a **25 ns** trajectory simulation successfully. | ✅ *Completed* |
-| **10. Trajectory Analysis** | Analyze structural fluctuations post-simulation via RMSD, RMSF, Rg, and H-bonds. | Quantifying the true binding stability and binding kinetics over time. | Processed trajectory data and plotted thermodynamic graphs using R. | ✅ *Completed* |
+Hsp70 is a molecular chaperone overexpressed in many cancers and is linked to tumor cell survival and resistance to apoptosis. The ATP-binding NBD is one of the sites considered for small-molecule inhibition. This project asks a narrow question: does docked curcumin stay near its docked site during a short MD run?
 
 ---
 
-## 📊 Visual Evidence & Analysis Figures
+## Repository contents
 
-#### Phase 2: Active Site Identification (P2RANK)
-![Predicted Pocket](figures/predicted_pocket.png)
+| Path | What it is |
+| :--- | :--- |
+| `topol.top` | Protein topology from `gmx pdb2gmx` (GROMACS 2023.3), with ligand, TIP3P water and ion includes |
+| `posre.itp` | Protein position restraints |
+| `curcumin_ligand.itp` | Curcumin topology used in `topol.top` (GAFF atom types, net charge 0) |
+| `ligand/` | Curcumin structure files and acpype output in several formats (AMBER, GROMACS, CHARMM, CNS), plus `em.mdp` and `md.mdp` |
+| `figures/` | Docking, pocket, interaction and trajectory-animation figures |
+| `Protein_Stability_MD_Analysis.png` | Protein RMSD, RMSF and Rg |
+| `Ligand_Interaction_MD_Analysis.png` | Ligand RMSD and protein–ligand H-bonds |
+| `Hsp70_Curcumin_Manuscript.pdf` | Two-page preprint |
 
-#### Phase 3: Phytochemical Drug-Likeness Radar (SwissADME)
-![Curcumin Radar](figures/curcumin_radar.png)
-
-#### Phase 4: Target Protein Extraction (PDB: 7GYI)
-![HSP70 Protein](figures/hsp70_protein.png)
-
-#### Phase 5: Molecular Interaction Profiling (PLIP)
-![Native Interactions](figures/native_interactions.png)
-
-#### Phase 10: Protein Backbone Stability, Flexibility & Compactness (MD)
-![Protein Stability Analysis](Protein_Stability_MD_Analysis.png)
-
-#### Phase 10: Ligand Binding Positional Stability & Hydrogen Bonding (MD)
-![Ligand Interaction Analysis](Ligand_Interaction_MD_Analysis.png)
+Trajectories and run files (`*.xtc`, `*.trr`, `*.edr`, `*.cpt`, `*.tpr`, `*.log`) are excluded by `.gitignore`.
 
 ---
 
-## 🧬 Project Workflow & Detailed Methodology
+## Methods (as reflected in the files in this repo)
 
-### 1. Structure Preparation & Target Selection
-* **Target Protein:** Human Heat Shock Protein 70 (HSP70 / HSPA1A) retrieved from the PDB database (`7GYI`, $1.90\text{ \AA}$ resolution).
-* **Ligand Preparation:** Curcumin structure retrieved, optimized, and parameterized using force field topologies.
+### Target and pocket
+- Structure: PDB `7GYI`, reported resolution 1.90 Å. ⚠️ *TODO(confirm): entry, chain and construct (the RMSF plot shows ~390 residues, consistent with an NBD construct).*
+- Pocket prediction: P2RANK (PrankWeb), pocket 1 in the ATP-binding site.
 
-### 2. Molecular Docking (CADD)
-* Rigid and flexible docking simulations executed via AutoDock Vina to identify optimal binding pose, binding free energy ($\Delta G = -7.132\text{ kcal/mol}$), and key hydrogen-bonding anchors (`Lys-1296`, `Glu-269`) within the nucleotide-binding domain (NBD).
+### ADME / toxicity
+- SwissADME: curcumin passes Lipinski's Rule of Five.
+- ADMETlab 3.0: hERG probability 0.437, hepatotoxicity probability 0.429. These are mid-range values and are not a clear "low risk" call.
 
-### 3. Molecular Dynamics (MD) Simulation Setup (GROMACS)
-* **System Solvation:** Protein-ligand complex centered in a cubic box and solvated with explicit water models (SPC/E / TIP3P).
-* **Charge Neutralization:** Counter-ions ($Na^+$ / $Cl^-$) added to neutralize net system charge.
-* **Energy Minimization:** Executed via Steepest Descent algorithm to remove steric clashes and optimize geometry.
-* **Equilibration Ensembles:** 
-  * **NVT Ensemble:** Constant Particles, Volume, and Temperature ($310\text{ K}$) for thermal stabilization.
-  * **NPT Ensemble:** Constant Particles, Pressure ($1\text{ bar}$), and Temperature for density stabilization.
+### Docking
+- AutoDock Vina, grid centered on the predicted ATP-site pocket. Reported best affinity: **−7.132 kcal/mol**.
+- ⚠️ *TODO: add receptor/ligand PDBQT files, Vina config (center, box size, exhaustiveness, seed), the output poses and the log.*
+- ⚠️ *TODO: only curcumin and thymoquinone are described as screened. State the real number of compounds, or call this a two-compound comparison.*
+- Interactions (PLIP): hydrogen bonds reported with Glu-269 and "Lys-1296". ⚠️ *TODO: residue 1296 does not exist in a ~390-residue NBD. Replace with the PDB-chain numbering and the matching residue in the simulated topology.*
 
-### 4. Production MD Simulation Run
-* A high-performance production run of **25 ns** ($12,500,000$ steps) executed in a Linux/WSL environment to capture dynamic structural fluctuations and binding kinetics.
+### Ligand parameterization
+- Tool: acpype v2022.7.21, GAFF atom types, written to `curcumin_ligand.itp` (47 atoms, net charge 0).
+- Tautomer: **diketo** form (central sp3 CH2 between two C=O). Curcumin is mostly enol in solution, so this is a modeling choice and a limitation.
+- ⚠️ *TODO(confirm): partial-charge method (acpype default is AM1-BCC).*
 
- ![MD Trajectory Animation](figures/md_simulation.gif)
+### System setup
+- Protein: `gmx pdb2gmx -f 7GYI_fixed.pdb -o 7GYI_processed.gro -p topol.top -ignh`
+- Force field: **AMBER99SB-ILDN** (protein), **GAFF** (ligand), **TIP3P** water.
+- Solvent and ions: 42,900 water molecules and 1 Cl⁻ (charge neutralization only).
+- ⚠️ *TODO: box type and size (cubic vs octahedron) and the solvation/ion commands.*
 
-### 5. Post-Simulation Trajectory Analysis
-Post-simulation trajectory evaluation quantified structural complex stability through:
-* **RMSD (Root Mean Square Deviation):** The backbone RMSD initialized rapidly and stabilized after ~15 ns, maintaining a steady equilibrium state around ~0.28 nm for the remainder of the 25 ns simulation.
-* **RMSF (Root Mean Square Fluctuation):** Mapping per-residue flexibility revealed core domain and binding pocket rigidity (< 0.2 nm), with flexible fluctuations strictly confined to the terminal regions (N- and C-termini).
-* **Radius of Gyration ($R_g$):** $R_g$ values progressively decreased and plateaued between 2.20 nm and 2.22 nm, demonstrating that Hsp70 remained tightly folded and compact upon Curcumin binding.
-* **Intermolecular Hydrogen Bonds:** The ligand experienced a slight conformational shift around 13 ns to settle into an energetically favorable pose (~0.6 nm RMSD) while maintaining a continuous hydrogen bonding network (1 to 3 active H-bonds) across the entire 25 ns trajectory.
-
----
-
-## 🛠️ Software Stack & Environment Specifications
-
-| Category | Tool / Software | Version / Server | Purpose |
-| :--- | :--- | :--- | :--- |
-| **Operating Environment** | Ubuntu via Linux WSL2 | 22.04 LTS | High-performance command-line computing |
-| **Target & Active Site** | RCSB PDB / P2RANK | PrankWeb Server | Structure retrieval (`7GYI`) & Binding site mapping |
-| **Virtual Screening** | SwissADME / ADMETlab | Web Servers | Lipinski filtering & ADMET toxicity profiling |
-| **Molecular Docking** | AutoDock Vina | v1.2.x | Flexible ligand-protein docking simulations |
-| **Interaction Profiling** | PLIP Server / PyMOL | Web / v2.5+ | Non-covalent interaction mapping & visualization |
-| **MD Engine** | GROMACS | v2023.x / CHARMM36 | System setup, equilibration, & trajectory production |
-| **Data Parsing & Plotting** | R / RStudio | v4.x | Statistical data visualization & plot generation |
-| **Format Conversion** | OpenBabel | v3.1.x | Chemical format conversion and atom parameterization |
+### Simulation parameters (`ligand/md.mdp`)
+- 2 fs time step, 12,500,000 steps = **25 ns**; H-bond constraints; PME electrostatics.
+- V-rescale thermostat, single `System` group, reference temperature **300 K**.
+- **No pressure coupling** in this file (the production run is NVT as written).
+- Frames saved every 10 ps.
+- ⚠️ *TODO: this file sits in `ligand/` and refers to an acpype test topology. Confirm it is the file actually used for production, and add the real `ions.mdp`, `nvt.mdp` and `npt.mdp` with equilibration lengths.*
 
 ---
 
-## 🏁 Future Work
-Upon completion of the 25 ns production trajectory and initial analysis:
-1. Generate thermodynamic plots (RMSD, RMSF, $R_g$, H-bonds) using GROMACS analysis tools and R/Python visualization libraries.
-2. Calculate binding free energies using MM-PBSA / MM-GBSA methods.
-3. Prepare computational findings for academic research publication and wet-lab validation.
-  * Radius of Gyration (Rg)
-  * Hydrogen Bond (H-bonds) profiling over the simulation trajectory.
+## Results (read from the plots)
+
+### Protein
+- Backbone RMSD rises to ~0.25 nm in the first nanosecond, varies between ~0.25 and ~0.45 nm from 5 to 19 ns (peak near 14 ns), and sits around 0.25–0.30 nm over the last ~6 ns.
+- Rg falls from ~2.3 nm at the start to ~2.20–2.23 nm in the last ~5 ns.
+- RMSF is below ~0.3 nm for most residues; the N- and C-terminal residues move much more (up to ~1.0 and ~1.45 nm).
+
+### Ligand
+- Ligand RMSD stays near 0.1–0.3 nm until ~12 ns, then moves to ~0.4–0.75 nm for the rest of the run. The ligand has left its starting pose; whether it stays in the pocket is **not shown by this plot alone**.
+- Protein–ligand H-bonds: typically 1–2 (occasionally 3) during the first ~6.5 ns, then mostly 0–1 with intermittent 1–2 windows (around 14–16 ns and 19–21 ns). They are not continuous over the 25 ns run.
+
+---
+
+## Limitations
+
+- One 25 ns trajectory, no replicas, no apo or reference-ligand control. Differences in protein stability cannot be attributed to curcumin.
+- Docking scores around −7 kcal/mol are modest, and the docking protocol was not validated (no redocking of a known ligand, no known-inhibitor comparison).
+- Curcumin is a frequent hitter in biochemical assays (PAINS-type behavior), so a computational hit needs experimental support.
+- MD of this length does not give binding kinetics or free energies.
+
+## Next steps
+
+1. Check pose retention (ligand–pocket distance and contact occupancy) after the ligand RMSD jump.
+2. Validate docking (redock a co-crystal ligand, compare with a known Hsp70 NBD inhibitor).
+3. Repeat the MD with replicas and an apo control; then estimate binding free energy (e.g., MM-GBSA).
+
+## Software
+
+GROMACS 2023.3, AutoDock Vina 1.2.x, acpype 2022.7.21, OpenBabel 3.1.x, PyMOL, R (ggplot2/base plotting), SwissADME, ADMETlab 3.0, PrankWeb (P2RANK), PLIP. Run on Ubuntu 22.04 under WSL2.
+
+## Citation
+
+Beshoy Essam Saber. *In Silico Evaluation and 25 ns Molecular Dynamics Simulation of Human Hsp70–Curcumin Complex.* Zenodo, https://doi.org/10.5281/zenodo.23085117
+
+## License
+
+⚠️ *TODO: add a LICENSE file (e.g., MIT for code and scripts).*
